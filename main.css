@@ -1,65 +1,309 @@
+:root {
+  --bg-1: linear-gradient(135deg, #0f1724 0%, #071029 50%, #091428 100%);
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-2: rgba(255, 255, 255, 0.04);
+  --accent: #6ee7b7;
+  --muted: rgba(255, 255, 255, 0.75);
+  --win: #2dd4bf;
+  --lose: #fb7185;
+  --draw: #93c5fd;
+  --card-radius: 14px;
+}
+
 * {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
   margin: 0;
-  padding: 0;
-  text-align: center;
+  font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  background: var(--bg-1);
+  color: var(--muted);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
 }
+
+.wrap {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
 h1 {
-  background-color: #081b31;
-  color: #fff;
-  height: 3em;
-  line-height: 3em;
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.2px;
 }
-.choice {
-  height: 105px;
-  width: 105px;
-  border-radius: 50%;
+.sub {
+  color: rgba(255, 255, 255, 0.67);
+  font-size: 0.92rem;
+}
+
+/* game board */
+.board {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.top-row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  overflow: hidden;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-.choice:hover {
-  cursor: pointer;
-  background-color: #081b31;
-}
-.choice img {
-  height: 100px;
-  width: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-.choices {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-  margin-top: 5rem;
-}
+
 .score-board {
   display: flex;
-  justify-content: center;
+  gap: 18px;
   align-items: center;
-  font-size: 2rem;
-  margin-top: 3rem;
-  gap: 5rem;
 }
-#user-score,
-#comp-score {
-  font-size: 4rem;
+
+.score {
+  min-width: 90px;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(230, 13, 13, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+.score .num {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.score .label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 6px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--glass);
+  color: #e6f6f0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 160ms ease, background 160ms;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .msg {
-  background-color: #081b31;
-  color: #fff;
+  margin: 18px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
-.msg-container {
-  margin-top: 3rem;
+.msg p {
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
 }
-#msg {
-  background-color: #081b31;
-  color: #fff;
-  font-size: 2rem;
-  display: inline;
-  padding: 1rem;
-  border-radius: 1rem;
+
+/* choices area */
+.choices {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.choice-btn img {
+  width: 95%;
+  height: 95%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.choice-btn {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  backdrop-filter: blur(10px) saturate(160%);
+  transition: 0.3s ease;
+  box-shadow: 0 0 0 rgba(0, 255, 200, 0);
+}
+
+.choice-btn:hover {
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 0 25px rgba(0, 255, 200, 0.22);
+}
+
+.choice-btn:active {
+  transform: scale(0.98);
+}
+.choice-btn svg {
+  width: 68px;
+  height: 68px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.36));
+}
+
+.selected {
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  box-shadow: 0 0 40px rgba(0, 255, 200, 0.35),
+    inset 0 0 12px rgba(0, 255, 200, 0.2);
+  transform: scale(1.12);
+}
+
+/* result panel */
+.result-panel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 18px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+}
+.who .title {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+.who .pick {
+  width: 84px;
+  height: 84px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.015),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* small helper styles */
+.muted {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+/* responsive */
+@media (max-width: 640px) {
+  .score-board {
+    gap: 10px;
+  }
+  .choice-btn {
+    width: 96px;
+    height: 96px;
+  }
+  .choice-btn svg {
+    width: 54px;
+    height: 54px;
+  }
+  .score .num {
+    font-size: 1.6rem;
+  }
+}
+
+/* small score pulse animation */
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.22);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* message color variants */
+.msg-win {
+  background: linear-gradient(
+    90deg,
+    rgba(45, 212, 191, 0.12),
+    rgba(45, 212, 191, 0.06)
+  ) !important;
+  border-color: rgba(45, 212, 191, 0.2) !important;
+  color: #dffaf4;
+}
+.msg-lose {
+  background: linear-gradient(
+    90deg,
+    rgba(251, 113, 133, 0.1),
+    rgba(251, 113, 133, 0.05)
+  ) !important;
+  border-color: rgba(251, 113, 133, 0.16) !important;
+  color: #fff1f3;
+}
+.msg-draw {
+  background: linear-gradient(
+    90deg,
+    rgba(147, 197, 253, 0.1),
+    rgba(147, 197, 253, 0.03)
+  ) !important;
+  border-color: rgba(147, 197, 253, 0.12) !important;
+  color: #f0f8ff;
 }

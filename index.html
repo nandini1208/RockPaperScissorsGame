@@ -1,40 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rock Paper Scissors Game</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Rock Paper Scissors — Nandini Gupta</title>
+
+    <!-- Google font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="main.css" />
   </head>
+
   <body>
-    <h1>Rock Paper Scissors</h1>
+    <div class="wrap">
+      <header>
+        <div>
+          <h1>Rock • Paper • Scissors</h1>
+          <div class="sub">Modern glass UI — built by Nandini Gupta</div>
+        </div>
 
-    <div class="choices">
-      <div class="choice" id="rock">
-        <img src="images/rock.png" alt="Rock" />
-      </div>
+        <div class="score-board">
+          <div class="score">
+            <div class="num" id="user-score">0</div>
+            <div class="label">You</div>
+          </div>
 
-      <div class="choice" id="paper">
-        <img src="images/paper.png" alt="Paper" />
-      </div>
+          <div class="score">
+            <div class="num" id="comp-score">0</div>
+            <div class="label">Computer</div>
+          </div>
+        </div>
+      </header>
 
-      <div class="choice" id="scissors">
-        <img src="images/scissor.jpg" alt="Scissors" />
-      </div>
+      <main class="board">
+        <div class="top-row">
+          <div class="muted">Choose your move</div>
+          <div class="controls">
+            <button class="btn secondary" id="resetBtn">Reset</button>
+            <a class="btn" href="https://github.com/nandini1208" target="_blank"
+              >GitHub</a
+            >
+          </div>
+        </div>
+
+        <div class="msg">
+          <p id="message">Play your move</p>
+        </div>
+
+        <div class="choices">
+          <div class="choice-btn" data-choice="rock">
+            <img src="images/rock.png" alt="Rock" />
+          </div>
+
+          <div class="choice-btn" data-choice="paper">
+            <img src="images/paper.png" alt="Paper" />
+          </div>
+
+          <div class="choice-btn" data-choice="scissors">
+            <img src="images/scissor.jpg" alt="Scissors" />
+          </div>
+        </div>
+
+        <div class="result-panel">
+          <div class="who">
+            <div class="title">You picked</div>
+            <div class="pick" id="you-pick">—</div>
+          </div>
+
+          <div class="who">
+            <div class="title">Computer picked</div>
+            <div class="pick" id="comp-pick">—</div>
+          </div>
+        </div>
+
+        <footer>
+          <div>Made with ❤️ by <strong>Nandini Gupta</strong></div>
+          <div class="muted">Tip: Use keyboard (← → ↑) to play</div>
+        </footer>
+      </main>
     </div>
-    <div class="score-board">
-      <div class="score">
-        <p id="user-score">0</p>
-        <p>You</p>
-      </div>
-      <div class="score">
-        <p id="comp-score">0</p>
-        <p>Comp</p>
-      </div>
-    </div>
-    <div class="msg-container">
-      <p id="msg">Play your move</p>
-    </div>
+
+    <!-- JS -->
     <script src="script.js"></script>
   </body>
 </html>
