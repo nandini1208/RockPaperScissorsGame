@@ -432,13 +432,27 @@ footer {
   }
 
   .choice-btn {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .choice-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   }
 
   .choice-btn img {
-    width: 85%;
-    height: 85%;
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+    pointer-events: none; /* important: so clicking image also triggers choice */
   }
 
   .result-panel {
@@ -481,4 +495,120 @@ footer {
   .score .num {
     font-size: 1.4rem;
   }
+}
+.win {
+  animation: winFlash 0.5s ease;
+}
+@keyframes winFlash {
+  0% {
+    box-shadow: 0 0 0px #4caf50;
+  }
+  50% {
+    box-shadow: 0 0 20px #4caf50;
+  }
+  100% {
+    box-shadow: 0 0 0px #4caf50;
+  }
+}
+
+.lose {
+  animation: loseFlash 0.5s ease;
+}
+@keyframes loseFlash {
+  0% {
+    box-shadow: 0 0 0px #ff3b3b;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff3b3b;
+  }
+  100% {
+    box-shadow: 0 0 0px #ff3b3b;
+  }
+}
+
+.draw {
+  animation: drawFlash 0.5s ease;
+}
+@keyframes drawFlash {
+  0% {
+    box-shadow: 0 0 0px #888;
+  }
+  50% {
+    box-shadow: 0 0 20px #888;
+  }
+  100% {
+    box-shadow: 0 0 0px #888;
+  }
+}
+#soundToggle.off {
+  background: #444;
+  color: #eee;
+}
+/* 3D tilt hover effect */
+.choice-btn {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.choice-btn:hover {
+  transform: rotateX(12deg) rotateY(-12deg) scale(1.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.choice-btn:active {
+  transform: scale(0.95);
+}
+
+/* Smooth hover animation for images inside buttons */
+.choice-btn img {
+  width: 76%;
+  height: 76%;
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+}
+
+.choice-btn:hover img {
+  transform: translateZ(12px);
+}
+/* Glow effect when selected */
+.choice-btn.selected {
+  box-shadow: 0 0 20px rgba(110, 231, 183, 0.5),
+    0 0 40px rgba(110, 231, 183, 0.3), inset 0 0 10px rgba(110, 231, 183, 0.2);
+  transform: scale(1.1);
+  border: 1px solid rgba(110, 231, 183, 0.4);
+  animation: selectPulse 0.4s ease;
+}
+
+/* Smooth pulse animation */
+@keyframes selectPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+/* Highlight winning choice */
+.win-glow {
+  box-shadow: 0 0 20px 5px #00ff00;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+/* Highlight losing choice */
+.lose-glow {
+  box-shadow: 0 0 20px 5px red;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+/* Highlight draw */
+.draw-glow {
+  box-shadow: 0 0 20px 5px #ffff00;
+  transform: scale(1.05);
+  transition: 0.3s;
 }
